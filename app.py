@@ -13,20 +13,20 @@ def kidney():
 
 def ValuePredictor(to_predict_list, size):
     to_predict = np.array(to_predict_list).reshape(1,size)
-    if(size==7):
+    if(size==8):
         loaded_model = joblib.load(r'c:\Users\khush\OneDrive\Documents\Desktop\GitDemo\Kidney-Disease-Pred/kidney_model.pkl')
         result = loaded_model.predict(to_predict)
     return result[0]
 
 @app.route('/predict', methods = ["POST"])
 def predict():
-    result=0
+    result=1
     if request.method == "POST":
         to_predict_list = request.form.to_dict()
         to_predict_list = list(to_predict_list.values())
         to_predict_list = list(map(float, to_predict_list))
          #diabetes
-        if(len(to_predict_list)==7):
+        if(len(to_predict_list)==8):
             result = ValuePredictor(to_predict_list,7)
     
     if(int(result)==1):
